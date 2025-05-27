@@ -1,0 +1,496 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css " integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --primary-gradient: linear-gradient(135deg, #baf3f3, #77e3b1, #dce377);
+      --secondary-gradient: linear-gradient(to right, #ff9a9e,#b1634e, #fad0c4);
+      --accent-color: #ffffff;
+      --text-color: #333;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-color);
+      background: rgb(216, 206, 206,0.5);
+      line-height: 1.6;
+    }
+
+    header {
+      text-align: center;
+      padding: 4rem 1rem 2rem;
+      transition: all 0.3s ease;
+      background: var(--primary-gradient);
+    }
+    #main-header.hidden {
+    opacity: 0;
+     visibility: hidden;
+}  
+
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--accent-color);
+      transition: transform 0.3s ease;
+    }
+
+    .profile-pic:hover {
+      transform: scale(1.1);
+    }
+
+    h1 {
+      font-family: "Audiowide", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      margin-top: 1rem;
+      font-size: 2rem;
+      color: #450dc9;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 2rem auto;
+      flex-wrap: wrap;
+      transition: all 0.3s ease;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--accent-color);
+      font-weight: 600;
+      position: relative;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      background: rgba(5, 5, 5, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      background: rgb(3, 3, 3);
+      transform: translateY(-3px);
+    }
+
+    /* Fixed Navigation */
+    .navbar-fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: var(--primary-gradient);
+      z-index: 1000;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+    }
+
+    .navbar-fixed .profile-pic {
+      width: 80px;
+      height: 80px;
+      margin-right: 1rem;
+    }
+
+    .navbar-fixed nav {
+      margin: 0;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+ /* Mobile Navbar */
+    .navbar-mobile {
+      display: none;
+      flex-direction: column;
+      align-items: flex-start;
+      background: rgb(24, 23, 23,0.9);
+      padding: 1rem;
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 250px;
+      height: 100vh;
+      z-index: 1001;
+      box-shadow: -4px 0 6px rgba(0, 0, 0, 0.2);
+    }
+    .navbar-mobile.active {
+      display:flex;
+      color: white;
+    }
+    .menu-icon {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      margin-left: auto;
+    }
+    .main-content {
+      padding-top: 80px;
+    }
+
+    section {
+      max-width: 900px;
+      margin: auto;
+      padding: 2rem 1rem;
+      background: rgba(14, 13, 13, 0.25);
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+      border-radius: 15px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.6s ease-out;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h2 {
+      font-family: "Audiowide", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: black;
+      border-bottom: 2px solid var(--accent-color);
+      padding-bottom: 0.5rem;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    ul li {
+      margin-bottom: 1rem;
+    }
+
+    .project, .experience {
+      margin-bottom: 1.5rem;
+    }
+
+    .project h3, .experience h3 {
+      margin-bottom: 0.5rem;
+      color: var(--accent-color);
+    }
+
+    .tech-stack {
+      font-style: italic;
+      color: #272626;
+    }
+
+    .skills-item{
+        display: flex;
+        margin:2rem;
+        gap: 5rem;
+        flex-wrap: wrap;
+    }
+    .skill-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .skill-item i {
+      font-size: 50px;
+      margin-right: 10px;
+      color: #0078d4; /* Icon color */
+    }
+
+    .skill-item span {
+      font-size: 18px;
+      color: #555;
+    }
+
+    .cta {
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .cta a {
+      display: inline-block;
+      color: var(--secondary-gradient);
+      padding: 0.8rem 2rem;
+      border-radius: 30px;
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+
+    }
+
+    .cta a:hover {
+      transform: scale(1.05);
+    }
+
+    .hamburger-icon {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+     @media (max-width: 768px) {
+      header {
+        padding: 1rem;
+      }
+      h1 {
+        font-size: 1.5rem;
+      }
+      .desktop-nav {
+        display: none;
+      }
+      .menu-icon {
+        display: block;
+      }
+      .navbar-fixed {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      .navbar-fixed .profile-pic {
+        width: 50px;
+        height: 50px;
+      }
+      .navbar-fixed nav {
+        display: none;
+      }
+      .skill-item i {
+        font-size: 25px;
+      }
+      .skill-item span {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Static Header -->
+  <header id="main-header">
+    <img src="./profilepicture.jpg" alt="Profile Picture" class="profile-pic">
+    <h1>Hello, I'm Vignesh Kumar</h1>
+    <nav class="desktop-nav">
+      <a href="#about">About Me</a>
+      <a href="#education">Education</a>
+      <a href="#work">Work Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <i class="fa-solid fa-angle-down menu-icon"></i>
+  </header>
+
+  <!-- Mobile Navbar -->
+  <div class="navbar-mobile">
+    <i class="fa-solid fa-times close-icon" style="align-self: flex-end; font-size: 2rem; cursor: pointer;"></i>
+    <nav id="mobile-nav">
+      <a href="#about">About Me</a>
+      <a href="#education">Education</a>
+      <a href="#work">Work Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+
+  <!-- Main Content Wrapper -->
+  <div class="main-content">
+
+    <section id="about">
+      <h2>About Me</h2>
+      <p>I am a versatile professional with 3+ years of experience as a Software Developer and a strong academic background in MBA International. 
+        Skilled in <b>C#, ASP.NET, SQL, and agile</b> methodologies, I excel in designing, developing, and maintaining business applications while driving operational efficiency. 
+        My expertise spans requirements analysis, process optimization, and cross-functional collaboration, supported by robust communication and leadership skills. 
+        Additionally, my <b>digital marketing</b> certification enhances my ability to leverage online platforms for effective outreach and innovation. 
+        I thrive in dynamic environments, blending technical proficiency with strategic thinking to deliver impactful solutions.</p>
+    </section>
+
+    <section id="education">
+      <h2>Education</h2>
+      <ul>
+        <li><strong>MBA International - Grade: 2:1 </strong><br>Canterbury Christ Church University, Canterbury, Kent Sep 2022 – Sep 2023</li>
+        <li><strong>B.E. Automobile Engineering-8.56 CGPA</strong><br>Anna University, Chennai, India July 2015 – June 2019</li>
+      </ul>
+    </section>
+
+    <section id="work">
+      <h2>Work Experience</h2>
+      <div class="experience">
+        <h3>Software Engineer, Cognizant Technology Solutions, Chennai, India      July 2019 – Sep 2022</h3>
+        <p>Developed scalable web applications using C#, .Net Core, WPF, Web API, ADO.Net and SQL database.
+           and improved application performance by 30%.
+        <br>Additionally, performed Manual Testing of Applications utilizing various Testing Types, including 
+        Unit Testing, User Acceptance Testing (UAT), System Integration Testing (SIT), and Regression Testing.
+        </p>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+
+      <h3>Software Development Projects</h3>
+      <div class="project">
+        <h3>PISAR & FAIRTRACK</h3>
+        <p>A Windows application, which is use by German's chemical company for creates chemicals substance for fields and does research on it.
+          PISAR is the combination of disparate systems which classified into several modules.
+</p>
+        <p class="tech-stack"><b>Tech Stack:</b> ASP. NET Core, WPF, C#, MVVM, Web-API, SQL Server.</p>
+        <p style="color: blue;">Internal Project</p>
+      </div>
+      <div class="project">
+        <h3>DHL</h3>
+        <p>A weather forecasting service that provides accurate hourly forecasts using OpenWeatherMap API and a custom caching system.</p>
+        <p class="tech-stack"><b>Tech Stack:</b> ADO.NET, C#, SQL Server.</p>
+         <p style="color: blue;">Internal Project</p>
+      </div>
+
+      <h3 style="margin-top: 2rem;">Business Projects</h3>
+      <div class="project">
+        <h3>Feedeasy-online petfood delivery</h3>
+        <p>In this project, I conducted thorough market research to support the launch of Feedeasy , an online pet food delivery business, with a primary focus on secondary research. 
+            The project encompassed a comprehensive approach, including detailed market analysis, competitor benchmarking, customer segmentation, risk assessment, and 
+            the creation of a robust business plan. Serving as a complete guide for launching the business at its initial stage, this project provided actionable insights to ensure 
+            strategic decision-making and effective execution in a competitive market.
+        </p>
+        <a href="https://docs.google.com/document/d/1TC_uTPraPZVfjNQ6MczP8yCCfEy_Xhvx/edit?usp=sharing&ouid=112906517597329320383&rtpof=true&sd=true"><link style="color: blue;">View Project</link></a>
+      </div>
+    </section>
+    <section id="tech stack">
+<div class="skills-section">
+    <h2>Technical Skills</h2>
+    <div class="skills-item">
+<div class="skill-item">
+      <i class="fa-brands fa-html5"></i>
+      <span>HTML5</span>
+    </div>
+    <div class="skill-item">
+      <i class="fa-brands fa-css3-alt icon-css"></i>
+      <span>CSS3</span>
+    </div>
+    <div class="skill-item">
+      <i class="fa-brands fa-js icon-js"></i>
+      <span>JavaScript</span>
+    </div>
+    <div class="skill-item">
+      <i class="fa-brands fa-angular"></i>
+      <span>Angular</span>
+    </div>
+    <div class="skill-item">
+      <i class="fa-solid fa-c icon-csharp"></i>
+      <span>C#</span>
+    </div>
+    
+    <div class="skill-item">
+      <i class="fa-solid fa-database icon-database"></i>
+      <span>SQL</span>
+    </div>
+    <div class="skill-item">
+      <i class="fa-solid fa-bullhorn"></i>
+      <span>Digital Marketing</span>
+    </div>
+    </div>
+    
+  </div>
+    </section>
+
+    <section id="contact" class="cta">
+      <h2>Contact Me</h2>
+      <a href="mailto:vigneshkumar10698@gmail.com " target="_blank"><i class="fa-solid fa-envelope"></i></a>
+      <a href="https://www.linkedin.com/in/vigneshkumar98/ " target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+      <a href="https://docs.google.com/document/d/1dL5_Hf6HsFAJxTe7P096h2oVIquqMlOP/edit?usp=sharing&ouid=112906517597329320383&rtpof=true&sd=true" target="_blank">
+        <i class="fa-solid fa-file-arrow-down"></i>
+      </a>
+    </section>
+
+  </div>
+
+  <script>
+    const sections = document.querySelectorAll('section');
+    const header = document.getElementById("main-header");
+    //const menuIcon = document.querySelector('.menu-icon');
+    const closeIcon = document.querySelector('.close-icon');
+    const navbarMobile = document.querySelector('.navbar-mobile');
+    let navbarFixed = null;
+    let isNavbarFixed = false;
+
+    // Intersection Observer for section animations
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
+
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+// Function to add event listener to menu icon
+    function addMenuIconListener(menuIcon) {
+      menuIcon.addEventListener('click', () => {
+        console.log("Menu icon clicked");
+        navbarMobile.classList.add('active');
+      });
+    }
+    // Scroll listener for sticky navbar
+    window.addEventListener("scroll", () => {
+      const scrollTop = window.scrollY;
+
+      if (scrollTop >= 100 && !navbarFixed && !isNavbarFixed ) {
+        navbarFixed = document.createElement("div");
+        navbarFixed.className = "navbar-fixed";
+        navbarFixed.innerHTML = `
+          <img src="./profilepicture.jpg" alt="Profile Picture" class="profile-pic">
+          <h1>Vignesh Kumar</h1>
+          <nav>
+            <a href="#about">About Me</a>
+            <a href="#education">Education</a>
+            <a href="#work">Work Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+          </nav>
+          <i class="fa-solid fa-angle-down menu-icon"></i>
+        `;
+        document.body.appendChild(navbarFixed);
+        // Reapply the event listener to the new menu icon
+        const newMenuIcon = navbarFixed.querySelector('.menu-icon');
+        addMenuIconListener(newMenuIcon);
+        header.classList.add("hidden");
+        isNavbarFixed = true;
+      } else if (scrollTop < 100 && navbarFixed && isNavbarFixed) {
+        navbarFixed.remove();
+        navbarFixed = null;
+        header.classList.remove("hidden");
+         isNavbarFixed = false;
+      }
+    });
+    // Add event listener to the initial static menu icon
+    const staticMenuIcon = document.querySelector('.menu-icon');
+    addMenuIconListener(staticMenuIcon);
+
+    // Hide mobile navbar
+    closeIcon.addEventListener('click', () => {
+      navbarMobile.classList.remove('active');
+    });
+  </script>
+
+</body>
+</html>
